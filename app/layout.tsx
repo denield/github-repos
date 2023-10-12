@@ -1,11 +1,10 @@
 import '@mantine/core/styles.css';
-import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { Metadata } from 'next';
+import { Container, MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 
-export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+export const metadata: Metadata = {
+  title: 'GitHub repos API UI',
 };
 
 export default function RootLayout({ children }: { children: any }) {
@@ -20,7 +19,11 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <Container pt="40" pb="100" size="lg">
+            {children}
+          </Container>
+        </MantineProvider>
       </body>
     </html>
   );

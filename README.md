@@ -1,37 +1,41 @@
-# Mantine Next.js template
+# GitHub Repositories Search via REST API
 
-This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
-If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
+[Demo](https://github-repos-three-beige.vercel.app/?type=org&searchTerm=google&page=1&sortBy=&sortDirection=&filterFor=all&itemsPerPage=10)
 
-## Features
+## The application must
 
-This template comes with the following features:
+- [x] Contain a form where a user can enter a GitHub username or organisation.
+- [x] Allow a user to submit the form, returning a paginated list of public repositories for the entered user or organisation
+- [x] Allow pagination, sorting and filtering by all of the options available on the API
 
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Tech Stack
 
-## npm scripts
+- React 18
+- TypeScript 5
+- NextJS 13 (with the new App Router)
+- Octokit
+- MantineJS
 
-### Build and dev scripts
+NextJS 13 has been chosen for learning purposes, the new app router has many new advantages, the main one is fully supporting React Server Components. State management is done via query parameters via a combination of custom set hook and the built in router in NextJS. Octokit has been chosen for ease of use of the GitHub API. MantineJS is my go-to lib atm for quick prototyping.
 
-- `dev` – start dev server
-- `build` – bundle application for production
-- `analyze` – analyzes application bundle with [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
+## Steps to run
 
-### Testing scripts
+`$ npm i && npm run dev`
 
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `jest` – runs jest tests
-- `jest:watch` – starts jest watch
-- `test` – runs `jest`, `prettier:check`, `lint` and `typecheck` scripts
+## Steps to make it deployable
 
-### Other scripts
+`$ vercel deploy`
 
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+## Ideas for new features
+
+- Generalise the search box, settings and the table view to be able to use the rest of the APIs
+- Add input validation (for eg.: zod)
+- Improve error handling of the GitHub API calls
+- Add logging mechanism for errors to be able to trace down production bugs
+- Display a loading spinner if a page loads for more than 200 ms
+- Do not display the 'Next' page button if the requested number of items are more than the items in the response (therefore there are no more pages)
+- Add support for automatic search upon typing without pressing enter / clicking on the submit button (but make sure to debounce the fn call)
+- Add support for more detailed pagionation where total count is supported
+- Add support for throttling API calls to avoid rate limiting (for eg.: https://github.com/octokit/plugin-throttling.js/)
+- Add support for multiple languages
+- Add support for mobile devices
